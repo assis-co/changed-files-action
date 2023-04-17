@@ -13,6 +13,8 @@ export async function getFiles(
     sha: target
   })
 
+  core.debug(`Retrieving commits '${commits}'`)
+
   if (!commits.data) return []
 
   const files = commits.data.flatMap(c => c.files)
