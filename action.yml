@@ -7,13 +7,16 @@ inputs:
     description: ''
   source:
     required: false
-    description: ''
+    description: 'The commit source'
+    default: 'HEAD'
   target:
     required: false
-    description: ''
+    description: 'The commit target'
+    default: 'HEAD~1'
   pattern:
     required: false
-    description: ''
+    description: 'Gloob pattern to filter files'
+    default: '**'
 outputs:
   has-changes:
     description: ''

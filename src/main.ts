@@ -4,12 +4,12 @@ import {getChangedFiles} from './github'
 
 async function run(): Promise<void> {
   try {
-    const source = core.getInput('source') || 'HEAD'
-    const target = core.getInput('target') || 'HEAD~1'
-    core.debug(`Commit target => '${target}'`)
+    const source = core.getInput('source')
+    const target = core.getInput('target')
+    const pattern = core.getInput('pattern')
+    core.debug(`[changed-files-action] Commit target => '${target}'`)
+    core.debug(`[changed-files-action] Pattern => '${pattern}'`)
 
-    const pattern = core.getInput('pattern') || '**.ts'
-    core.debug(`Pattern => '${pattern}'`)
     const files = (await getChangedFiles(source, target)).filter(
       minimatch.filter(pattern, {matchBase: true})
     )

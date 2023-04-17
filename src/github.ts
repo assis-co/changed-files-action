@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/named
 import {TaskOptions, simpleGit} from 'simple-git'
+import * as core from '@actions/core'
 
 export async function getChangedFiles(
   source: string,
@@ -16,6 +17,10 @@ export async function getChangedFiles(
   const diff = await git.diff(options)
 
   const files = diff.trim().split('\n')
+
+  core.debug(
+    `[changed-files-action] Founded these files '${JSON.stringify(files)}'`
+  )
 
   return files
 }
