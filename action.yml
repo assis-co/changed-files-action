@@ -5,11 +5,17 @@ inputs:
   github_token:
     required: true
     description: ''
+  source:
+    required: false
+    description: ''
   target:
     required: false
     description: ''
   pattern:
     required: false
+    description: ''
+outputs:
+  has-changes:
     description: ''
 runs:
   using: 'node16'

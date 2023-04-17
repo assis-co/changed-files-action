@@ -1,25 +1,21 @@
-import * as core from '@actions/core'
-import * as github from '@actions/github'
-import {CommitFile} from './types'
+// eslint-disable-next-line import/named
+import {TaskOptions, simpleGit} from 'simple-git'
 
-export async function getFiles(
+export async function getChangedFiles(
+  source: string,
   target: string
-): Promise<(CommitFile | undefined)[]> {
-  const client = github.getOctokit(core.getInput('github_token'))
+): Promise<string[]> {
+  const git = simpleGit()
+  const options: TaskOptions = {
+    '--name-only': null
+  }
 
-  const commits = await client.rest.repos.listCommits({
-    owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
-    sha: target
-  })
+  options[source] = null
+  options[target] = null
 
-  core.debug(
-    `Retrieving files '${JSON.stringify(commits.data.map(d => d.files))}'`
-  )
+  const diff = await git.diff(options)
 
-  if (!commits.data) return []
-
-  const files = commits.data.flatMap(c => c.files)
+  const files = diff.trim().split('\n')
 
   return files
 }
