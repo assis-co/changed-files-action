@@ -1,6 +1,6 @@
 {
   "name": "changed-files-action",
-  "version": "0.0.1-development",
+  "version": "1.0.0",
   "private": true,
   "description": "Changed Files github action",
   "main": "lib/main.js",
