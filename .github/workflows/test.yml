@@ -19,6 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./
+      - id: check
+        uses: ./
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test
+        if: steps.check.outputs.has-changes
+        run: 'Finish'
