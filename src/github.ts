@@ -13,7 +13,9 @@ export async function getFiles(
     sha: target
   })
 
-  core.debug(`Retrieving commits '${JSON.stringify(commits.data)}'`)
+  core.debug(
+    `Retrieving files '${JSON.stringify(commits.data.map(d => d.files))}'`
+  )
 
   if (!commits.data) return []
 

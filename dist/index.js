@@ -50,7 +50,7 @@ function getFiles(target) {
             repo: github.context.repo.repo,
             sha: target
         });
-        core.debug(`Retrieving commits '${JSON.stringify(commits.data)}'`);
+        core.debug(`Retrieving files '${JSON.stringify(commits.data.map(d => d.files))}'`);
         if (!commits.data)
             return [];
         const files = commits.data.flatMap(c => c.files);
@@ -110,8 +110,6 @@ function run() {
             core.debug(`Commit target => '${target}'`);
             const pattern = /.*/gm;
             core.debug(`Pattern => '${pattern}'`);
-            const files2 = yield (0, github_1.getFiles)(target);
-            core.debug(`Files => '${JSON.stringify(files2)}'`);
             const files = (yield (0, github_1.getFiles)(target)).filter(f => {
                 if (f === undefined)
                     return false;
