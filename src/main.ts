@@ -7,7 +7,7 @@ async function run(): Promise<void> {
     const target = core.getInput('target') || github.context.sha
     core.debug(`Commit target => '${target}'`)
 
-    const pattern = core.getInput('pattern') || '*'
+    const pattern = /.*/gm
     core.debug(`Pattern => '${pattern}'`)
 
     const files = (await getFiles(target)).filter(f => {
