@@ -15,10 +15,5 @@
     }
   ],
   "repositoryUrl": "https://github.com/assis-co/changed-files-action.git",
-  "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    "@semantic-release/changelog",
-    "@semantic-release/github"
-  ]
+  "plugins": ["@semantic-release/commit-analyzer", "@semantic-release/github"]
 }
