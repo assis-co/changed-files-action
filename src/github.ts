@@ -1,6 +1,9 @@
 // eslint-disable-next-line import/named
 import {TaskOptions, simpleGit} from 'simple-git'
+import * as debug from 'debug'
 import * as core from '@actions/core'
+
+if (core.isDebug()) debug.enable('simple-git, simple-git:*')
 
 export async function getChangedFiles(
   source: string,
