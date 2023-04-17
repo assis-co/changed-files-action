@@ -60,4 +60,6 @@ jobs:
           commit_message: update dist/
 
       - name: Releasing
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run semantic-release
