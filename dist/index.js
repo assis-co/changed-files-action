@@ -2,14 +2,38 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 5928:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getChangedFiles = void 0;
 // eslint-disable-next-line import/named
 const simple_git_1 = __nccwpck_require__(9103);
+const core = __importStar(__nccwpck_require__(2186));
 async function getChangedFiles(source, target) {
     const git = (0, simple_git_1.simpleGit)();
     const options = {
@@ -19,6 +43,7 @@ async function getChangedFiles(source, target) {
     options[target] = null;
     const diff = await git.diff(options);
     const files = diff.trim().split('\n');
+    core.debug(`[changed-files-action] Founded these files '${JSON.stringify(files)}'`);
     return files;
 }
 exports.getChangedFiles = getChangedFiles;
@@ -60,11 +85,11 @@ const minimatch_1 = __nccwpck_require__(1953);
 const github_1 = __nccwpck_require__(5928);
 async function run() {
     try {
-        const source = core.getInput('source') || 'HEAD';
-        const target = core.getInput('target') || 'HEAD~1';
-        core.debug(`Commit target => '${target}'`);
-        const pattern = core.getInput('pattern') || '**.ts';
-        core.debug(`Pattern => '${pattern}'`);
+        const source = core.getInput('source');
+        const target = core.getInput('target');
+        const pattern = core.getInput('pattern');
+        core.debug(`[changed-files-action] Commit target => '${target}'`);
+        core.debug(`[changed-files-action] Pattern => '${pattern}'`);
         const files = (await (0, github_1.getChangedFiles)(source, target)).filter(minimatch_1.minimatch.filter(pattern, { matchBase: true }));
         core.setOutput('has-changes', files.length > 0);
     }
