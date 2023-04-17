@@ -11,7 +11,7 @@ async function run(): Promise<void> {
     core.debug(`Pattern => '${pattern}'`)
 
     const files2 = await getFiles(target)
-    core.debug(`Files => '${files2}'`)
+    core.debug(`Files => '${JSON.stringify(files2)}'`)
 
     const files = (await getFiles(target)).filter(f => {
       if (f === undefined) return false

@@ -13,7 +13,7 @@ export async function getFiles(
     sha: target
   })
 
-  core.debug(`Retrieving commits '${commits}'`)
+  core.debug(`Retrieving commits '${JSON.stringify(commits.data)}'`)
 
   if (!commits.data) return []
 
