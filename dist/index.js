@@ -50,6 +50,7 @@ function getFiles(target) {
             repo: github.context.repo.repo,
             sha: target
         });
+        core.debug(`Retrieving commits '${commits}'`);
         if (!commits.data)
             return [];
         const files = commits.data.flatMap(c => c.files);
@@ -107,11 +108,14 @@ function run() {
         try {
             const target = core.getInput('target') || github.context.sha;
             core.debug(`Commit target => '${target}'`);
-            const pattern = core.getInput('pattern') || '*';
+            const pattern = /.*/gm;
             core.debug(`Pattern => '${pattern}'`);
+            const files2 = yield (0, github_1.getFiles)(target);
+            core.debug(`Files => '${files2}'`);
             const files = (yield (0, github_1.getFiles)(target)).filter(f => {
                 if (f === undefined)
                     return false;
+                core.debug(`Testing file '${f.filename}'`);
                 return new RegExp(pattern).test(f.filename);
             });
             core.setOutput('has-changes', files.length > 0);
