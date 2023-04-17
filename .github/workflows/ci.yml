@@ -32,13 +32,13 @@ jobs:
         run: npm ci
 
       - name: Check format
-        run: npm format:check
+        run: npm run format:check
 
       - name: Check lint
-        run: npm lint
+        run: npm run lint
 
       - name: Tests
-        run: npm test
+        run: npm run test
 
       - name: Rebuild the dist/ directory
         run: |
