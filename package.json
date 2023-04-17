@@ -35,6 +35,10 @@
     "simple-git": "^3.17.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/github": "^8.0.7",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/debug": "^4.1.7",
     "@types/node": "^18.15.0",
     "@typescript-eslint/parser": "^5.58.0",
