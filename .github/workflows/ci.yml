@@ -50,12 +50,12 @@ jobs:
           if [ "$(git diff --ignore-space-at-eol dist/ | wc -l)" -gt "0" ]; then
             echo "Detected uncommitted changes after build.  See status below:"
             git diff
-            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "changes=true" >> $GITHUB_OUTPUT
           fi
         id: diff
 
       - uses: stefanzweifel/git-auto-commit-action@v4
-        if: ${{ steps.diff.outputs.has-changes == 'true' }}
+        if: ${{ steps.diff.outputs.changes == 'true' }}
         with:
           commit_message: update dist/
 
