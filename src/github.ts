@@ -3,7 +3,9 @@ import {TaskOptions, simpleGit} from 'simple-git'
 import * as debug from 'debug'
 import * as core from '@actions/core'
 
-if (core.isDebug()) debug.enable('simple-git, simple-git:*')
+if (core.isDebug()) {
+  debug.enable('simple-git, simple-git:*')
+}
 
 export async function getChangedFiles(
   source: string,
@@ -16,8 +18,6 @@ export async function getChangedFiles(
 
   options[source] = null
   options[target] = null
-
-  core.debug(`[changed-files-action] diff options '${JSON.stringify(options)}'`)
 
   const diff = await git.diff(options)
 

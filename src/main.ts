@@ -4,9 +4,9 @@ import {getChangedFiles} from './github'
 
 async function run(): Promise<void> {
   try {
-    const source = core.getInput('source')
-    const target = core.getInput('target')
-    const pattern = core.getInput('pattern')
+    const source = core.getInput('source', {trimWhitespace: true}) || 'HEAD'
+    const target = core.getInput('target', {trimWhitespace: true}) || 'HEAD~1'
+    const pattern = core.getInput('pattern', {trimWhitespace: true}) || '**'
     core.debug(`[changed-files-action] Source commit => '${source}'`)
     core.debug(`[changed-files-action] Target commit => '${target}'`)
     core.debug(`[changed-files-action] Pattern => '${pattern}'`)
