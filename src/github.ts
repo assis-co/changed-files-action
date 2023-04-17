@@ -14,6 +14,8 @@ export async function getChangedFiles(
   options[source] = null
   options[target] = null
 
+  core.debug(`[changed-files-action] diff options '${JSON.stringify(options)}'`)
+
   const diff = await git.diff(options)
 
   const files = diff.trim().split('\n')

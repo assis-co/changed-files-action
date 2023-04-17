@@ -41,6 +41,7 @@ async function getChangedFiles(source, target) {
     };
     options[source] = null;
     options[target] = null;
+    core.debug(`[changed-files-action] diff options '${JSON.stringify(options)}'`);
     const diff = await git.diff(options);
     const files = diff.trim().split('\n');
     core.debug(`[changed-files-action] Founded these files '${JSON.stringify(files)}'`);
@@ -88,7 +89,8 @@ async function run() {
         const source = core.getInput('source');
         const target = core.getInput('target');
         const pattern = core.getInput('pattern');
-        core.debug(`[changed-files-action] Commit target => '${target}'`);
+        core.debug(`[changed-files-action] Source commit => '${source}'`);
+        core.debug(`[changed-files-action] Target commit => '${target}'`);
         core.debug(`[changed-files-action] Pattern => '${pattern}'`);
         const files = (await (0, github_1.getChangedFiles)(source, target)).filter(minimatch_1.minimatch.filter(pattern, { matchBase: true }));
         core.setOutput('has-changes', files.length > 0);

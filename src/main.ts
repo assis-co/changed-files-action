@@ -7,7 +7,8 @@ async function run(): Promise<void> {
     const source = core.getInput('source')
     const target = core.getInput('target')
     const pattern = core.getInput('pattern')
-    core.debug(`[changed-files-action] Commit target => '${target}'`)
+    core.debug(`[changed-files-action] Source commit => '${source}'`)
+    core.debug(`[changed-files-action] Target commit => '${target}'`)
     core.debug(`[changed-files-action] Pattern => '${pattern}'`)
 
     const files = (await getChangedFiles(source, target)).filter(
