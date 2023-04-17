@@ -35,8 +35,9 @@ exports.getChangedFiles = void 0;
 const simple_git_1 = __nccwpck_require__(9103);
 const debug = __importStar(__nccwpck_require__(8237));
 const core = __importStar(__nccwpck_require__(2186));
-if (core.isDebug())
+if (core.isDebug()) {
     debug.enable('simple-git, simple-git:*');
+}
 async function getChangedFiles(source, target) {
     const git = (0, simple_git_1.simpleGit)();
     const options = {
@@ -44,7 +45,6 @@ async function getChangedFiles(source, target) {
     };
     options[source] = null;
     options[target] = null;
-    core.debug(`[changed-files-action] diff options '${JSON.stringify(options)}'`);
     const diff = await git.diff(options);
     const files = diff.trim().split('\n');
     core.debug(`[changed-files-action] Founded these files '${JSON.stringify(files)}'`);
@@ -89,9 +89,9 @@ const minimatch_1 = __nccwpck_require__(1953);
 const github_1 = __nccwpck_require__(5928);
 async function run() {
     try {
-        const source = core.getInput('source');
-        const target = core.getInput('target');
-        const pattern = core.getInput('pattern');
+        const source = core.getInput('source', { trimWhitespace: true }) || 'HEAD';
+        const target = core.getInput('target', { trimWhitespace: true }) || 'HEAD~1';
+        const pattern = core.getInput('pattern', { trimWhitespace: true }) || '**';
         core.debug(`[changed-files-action] Source commit => '${source}'`);
         core.debug(`[changed-files-action] Target commit => '${target}'`);
         core.debug(`[changed-files-action] Pattern => '${pattern}'`);
