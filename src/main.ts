@@ -13,6 +13,7 @@ async function run(): Promise<void> {
     const files = (await getFiles(target)).filter(f => {
       if (f === undefined) return false
 
+      core.debug(`Testing file '${f.filename}'`)
       return new RegExp(pattern).test(f.filename)
     })
 
