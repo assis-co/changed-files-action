@@ -96,6 +96,7 @@ async function run() {
         core.debug(`[changed-files-action] Target commit => '${target}'`);
         core.debug(`[changed-files-action] Pattern => '${pattern}'`);
         const files = (await (0, github_1.getChangedFiles)(source, target)).filter(minimatch_1.minimatch.filter(pattern, { matchBase: true }));
+        core.debug(`[changed-files-action] Files founded '${JSON.stringify(files)}'`);
         core.setOutput('has-changes', files.length > 0);
     }
     catch (error) {
