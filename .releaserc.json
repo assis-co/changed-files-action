@@ -21,6 +21,7 @@
       {
         "preset": "eslint",
         "releaseRules": [
+          {"tag": "Chore", "release": "minor"},
           {"type": "docs", "scope": "README", "release": "patch"},
           {"type": "refactor", "release": "patch"},
           {"type": "style", "release": "patch"}
