@@ -8,15 +8,12 @@ inputs:
   source:
     required: false
     description: 'The commit source'
-    default: 'HEAD'
   target:
     required: false
     description: 'The commit target'
-    default: 'HEAD~1'
   pattern:
     required: false
     description: 'Gloob pattern to filter files'
-    default: '**'
 outputs:
   has-changes:
     description: ''
