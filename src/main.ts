@@ -15,6 +15,10 @@ async function run(): Promise<void> {
       minimatch.filter(pattern, {matchBase: true})
     )
 
+    core.debug(
+      `[changed-files-action] Files founded '${JSON.stringify(files)}'`
+    )
+
     core.setOutput('has-changes', files.length > 0)
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
