@@ -1,5 +1,4 @@
 {
-  "preset": "eslint",
   "branches": [
     "+([0-9])?(.{+([0-9]),x}).x",
     "main",
@@ -16,5 +15,21 @@
     }
   ],
   "repositoryUrl": "https://github.com/assis-co/changed-files-action.git",
-  "plugins": ["@semantic-release/commit-analyzer", "@semantic-release/github"]
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "eslint",
+        "releaseRules": [
+          {"type": "docs", "scope": "README", "release": "patch"},
+          {"type": "refactor", "release": "patch"},
+          {"type": "style", "release": "patch"}
+        ],
+        "parserOpts": {
+          "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+        }
+      }
+    ],
+    "@semantic-release/github"
+  ]
 }
