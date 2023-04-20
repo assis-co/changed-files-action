@@ -27,4 +27,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Test
         if: steps.check.outputs.has-changes
-        run: 'Finish'
+        run: echo 'Finish'
