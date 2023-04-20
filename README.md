@@ -12,6 +12,6 @@ Ensure if the checkout action has `fetch-depth` option are 2
 ```yaml
 steps:
   - uses: actions/checkout@v3
-      with:
-        fetch-depth: 2
+    with:
+      fetch-depth: 2
 ```
