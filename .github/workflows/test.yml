@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          git diff "df0e9350414acbac53aaf0f22977203a0cfdb4f3" "e0dc74bf86f006b78302f46aad0e6f5fb4af0948"
+          git diff-tree "df0e9350414acbac53aaf0f22977203a0cfdb4f3" "e0dc74bf86f006b78302f46aad0e6f5fb4af0948"
       - id: check
         uses: ./
         with:
